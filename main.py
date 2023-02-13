@@ -1,6 +1,6 @@
 import json
 import utils
-
+#from pprint import pprint as pp
 score = 0
 right = 0
 
@@ -13,6 +13,8 @@ def start():
 
     with open("questions.json", encoding='utf-8') as jsn:
         questions = json.load(jsn)
+
+    #pp(questions)
 
     for attempt in range(utils.count_questions()):
         questions, user_choice = utils.choose_question(questions)

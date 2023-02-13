@@ -13,12 +13,12 @@ def choose_question(jsn: dict):
     max_len = max_column(jsn)
 
     for subject, item in jsn.items():
-        print(f"{subject + ' ' * (max_len - len(subject))}", end='')
+        print(f"{subject.ljust(max_len)}", end='')
         for value in item.keys():
             if not jsn[subject][value]["asked"]:
-                print(f" {value}", end='')
+                print(f" {value.ljust(5)}", end='')
             else:
-                print('    ', end='')
+                print('    '.ljust(5), end='')
         print('\n')
 
     while True:
@@ -43,14 +43,17 @@ def check_answer(jsn: dict, user_choice: list) -> int:
         return int(user_choice[1])
     else:
         print('Неверно!')
-        return 0
-
+        return -int(user_choice[1])
 
 
 def record(name: str, score: int, right: int):
+    with open("records.json", "r", encoding='utf-8') as jsn:
+        results = json.load(jsn)
+
+    results.append({name: {"points": score, "correct": right, "incorrect": count_questions() - right}})
+
     with open("records.json", "w", encoding='utf-8') as jsn:
-        temp_dict = {name: {"points": score, "correct": right, "incorrect": count_questions() - right}}
-        json.dump(temp_dict, jsn)
+        json.dump(results, jsn)
 
 
 def count_questions():

@@ -60,7 +60,7 @@ def get_statistics(list_):
 def create_list():
     list_of_quest = []
 
-    with open("questions.json", "r", encoding="utf-8") as f:
+    with open("ugadaika.json", "r", encoding="utf-8") as f:
         q = json.load(f)
 
         for one in q:

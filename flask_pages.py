@@ -5,7 +5,7 @@ import json
 def find_skill(skill):
     list_of_cand = []
     for one in candidates:
-        if skill in one["skills"].split(", "):
+        if skill in one["skills"].lower().split(", "):
             list_of_cand.append(candidates.index(one))
     return list_of_cand
 
@@ -24,7 +24,7 @@ def page_main():
         res += f"""{i["name"]} -
 {i["position"]}
 {i["skills"]}\n\n"""
-    res += "<pre>"
+    res += "</pre>"
     return res
 
 
@@ -35,7 +35,7 @@ def page_candidate(x):
     res += f"""{candidates[x - 1]["name"]} -
 {candidates[x - 1]["position"]}
 {candidates[x - 1]["skills"]}\n"""
-    res += "<pre>"
+    res += "</pre>"
     return res
 
 
@@ -47,8 +47,8 @@ def page_skill(skill):
         res += f"""{candidates[i]["name"]} -
 {candidates[i]["position"]}
 {candidates[i]["skills"]}\n\n"""
-    res += "<pre>"
+    res += "</pre>"
     return res
 
 
-app.run()
+app.run(debug=True)
